@@ -128,6 +128,7 @@
       background:linear-gradient(90deg,#fff 0%,#D9843B 50%,#fff 100%);
       background-size:200% auto;
       -webkit-background-clip:text;
+      background-clip:text;
       -webkit-text-fill-color:transparent;
       animation:gradientShift 4s ease-in-out infinite;
     }
@@ -317,6 +318,157 @@
       color: var(--accent-dark);
     }
 
+    /* ===== pricing-cards.css ===== */
+    .pricing-section{
+      background:#0D0D0D;
+      padding:6rem 2.5rem;
+      font-family:'Inter',sans-serif;
+    }
+    .pricing-section h2{
+      font-size:clamp(2rem,4vw,3rem);
+      font-weight:700;
+      text-align:center;
+      color:#fff;
+      margin-bottom:.5rem;
+    }
+    .pricing-subtitle{
+      text-align:center;
+      color:#8697A6;
+      margin-bottom:4rem;
+    }
+
+    .pricing-wrapper{
+      display:flex;
+      flex-wrap:wrap;
+      gap:2.5rem;
+      justify-content:center;
+      align-items:stretch;
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    /* CARD BASE */
+    .pricing-card{
+      flex:1 1 300px;
+      max-width:350px;
+      background:#364659;
+      border-radius:20px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      box-shadow:0 15px 30px rgba(217,132,59,.08);
+      transition:transform .3s,box-shadow .3s;
+    }
+    .pricing-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 20px 40px rgba(217,132,59,.2);
+    }
+
+    /* CARD IMAGE */
+    .card {
+      overflow: visible; 
+    }
+    .card-image{
+      width:100%;
+      height:200px;
+      object-fit:cover;
+    }
+
+    /* CARD CONTENT */
+    .card-content{
+      flex:1;
+      padding:2rem 2rem 2.5rem;
+      display:flex;
+      flex-direction:column;
+    }
+    .pricing-card h3{
+      font-size:1.5rem;
+      color:#fff;
+    }
+    .price{
+      font-size:2.5rem;
+      font-weight:700;
+      color:#fff;
+      margin:.75rem 0 .25rem;
+    }
+    .price span{
+      font-size:1rem;
+      font-weight:400;
+    }
+    .billing{
+      font-size:.875rem;
+      color:#8697A6;
+      margin-bottom:1.5rem;
+    }
+
+    .features{
+      list-style:none;
+      flex:1;
+      margin-bottom:2rem;
+      line-height:1.9;
+      color:#fff;
+    }
+    .features li::before{
+      content:"✔️";
+      margin-right:.5rem;
+    }
+
+    .btn-cta{
+      width:100%;
+      padding:.9rem;
+      border:none;
+      border-radius:50px;
+      background:#D9843B;
+      color:#fff;
+      font-weight:600;
+      cursor:pointer;
+      transition:background .3s;
+    }
+    .btn-cta:hover{background:#733C1D;}
+
+    /* CARD POPULAR */
+    .popular {
+      position:relative;
+    }
+    .pricing-card.popular {
+      background: #D9843B;
+      color: #0D0D0D;
+      transform: scale(1.05);
+      box-shadow: 0 20px 50px rgba(217,132,59,.3);
+      overflow: visible; /* permite que a badge fique sobreposta */
+    }
+    .pricing-card.popular:hover {
+      transform: scale(1.05) translateY(-6px);
+    }
+    .popular .card-badge {
+      position: absolute;
+      top: -18px; /* mais para cima */
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      color: #D9843B;
+      padding: 0.4rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      z-index: 20; /* garante sobreposição */
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08); /* opcional: sombra para destacar */
+    }
+    .popular .price,
+    .popular .features li{color:#0D0D0D;}
+    .popular .btn-cta {
+      background: #0D0D0D;
+      color: #fff;
+      transition: background .3s, color .3s;
+    }
+    .popular .btn-cta:hover {
+      background: #fff;
+      color: #D9843B;
+    }
+    .popular .billing {
+      color: #0D0D0D;
+    }
+
     /* FOOTER */
     footer {
       padding: 2rem;
@@ -370,6 +522,7 @@
       <li><a href="#inicio">Início</a></li>
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#treinos">Treinos</a></li>
+      <li><a href="#planos">Planos</a></li> <!-- NOVO ITEM -->
       <li><a href="#contato">Contato</a></li>
     </ul>
   </nav>
@@ -385,7 +538,7 @@
     <h2 class="section-title fade-in">Quem Sou Eu e Por Que Escolher-me?</h2>
     <p class="section-subtitle fade-in">Conheça a filosofia e a experiência por trás de cada treino.</p>
     <div class="about-content">
-      <img class="fade-in" src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=800&q=80" alt="João Guilherme" />
+      <img src="https://i.ibb.co/mVtDTfzR/2-F81-AABF-CE9-B-47-F5-806-C-56-D18-E95-EFC0-2.jpg" alt="2-F81-AABF-CE9-B-47-F5-806-C-56-D18-E95-EFC0-2" border="0">
       <div class="about-text fade-in">
         <h3>Olá, sou João Guilherme.</h3>
         <p>
@@ -417,6 +570,78 @@
     </div>
   </section>
 
+  <!-- ===== pricing-cards.html ===== -->
+  <section id="planos" class="pricing-section">
+    <h2>Escolha o Plano Ideal para Você</h2>
+    <p class="pricing-subtitle">
+      Preços transparentes, sem taxas ocultas. Pare quando quiser.
+    </p>
+
+    <div class="pricing-wrapper">
+      <!-- BÁSICO -->
+      <article class="pricing-card">
+        <img class="card-image" src="https://images.unsplash.com/photo-1550345332-09e3ac987658?auto=format&fit=crop&w=600&q=60" alt="Treino Básico">
+        <div class="card-content">
+          <h3>Básico</h3>
+          <p class="price">€79<span>/mês</span></p>
+          <p class="billing">Pagamento mensal · Cancelamento fácil</p>
+
+          <ul class="features">
+            <li>Plano de treino individualizado</li>
+            <li>Acompanhamento via app</li>
+            <li>1 sessão online/mês (45 min)</li>
+            <li>Suporte por WhatsApp</li>
+          </ul>
+
+          <button class="btn-cta">Começar Agora</button>
+        </div>
+      </article>
+
+      <!-- INTERMEDIÁRIO -->
+      <article class="pricing-card popular">
+        <img class="card-image" src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=600&q=60" alt="Treino Intermediário">
+        <div class="card-badge">Mais Popular</div>
+        <div class="card-content">
+          <h3>Intermediário</h3>
+          <p class="price">€149<span>/mês</span></p>
+          <p class="billing">Pagamento mensal · Cancelamento fácil</p>
+
+          <ul class="features">
+            <li>Tudo do plano Básico</li>
+            <li>2 sessões presenciais/semana</li>
+            <li>Avaliação mensal de composição corporal</li>
+            <li>Plano nutricional básico</li>
+            <li>Suporte prioritário 24/7</li>
+          </ul>
+
+          <button class="btn-cta">Começar Agora</button>
+        </div>
+      </article>
+
+      <!-- PREMIUM -->
+      <article class="pricing-card">
+        <img class="card-image" src="https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=600&q=60" alt="Treino Premium">
+        <div class="card-content">
+          <h3>Premium</h3>
+          <p class="price">€249<span>/mês</span></p>
+          <p class="billing">Pagamento mensal · Cancelamento fácil</p>
+
+          <ul class="features">
+            <li>Tudo do plano Intermediário</li>
+            <li>3 sessões/semana (presencial ou online)</li>
+            <li>Plano nutricional completo + ajustes semanais</li>
+            <li>Monitoramento via smartwatch</li>
+            <li>Acesso ilimitado WhatsApp / chamadas</li>
+            <li>Prioridade em agendamento</li>
+          </ul>
+
+          <button class="btn-cta">Começar Agora</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
   <section id="contato">
     <h2 class="section-title fade-in">Pronto para Transformar Sua Vida?</h2>
     <p class="section-subtitle fade-in">
