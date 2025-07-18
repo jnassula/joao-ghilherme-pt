@@ -283,12 +283,16 @@
       flex-direction: column;
       gap: 1.25rem;
       margin-bottom: 2rem;
+      border: 2px solid #D9843B; /* borda laranja */
+      border-radius: 16px;
+      padding: 2rem;
+      background: rgba(54, 70, 89, 0.15); /* opcional: leve destaque */
     }
 
     input, textarea {
       padding: 1rem;
-      border-radius: 8px;
-      border: 1px solid var(--surface);
+      border: 2px solid #D9843B;
+      border-radius: 16px;
       background: var(--surface);
       color: #fff;
       font-family: var(--font);
@@ -512,17 +516,109 @@
         padding: 4rem 1.5rem;
       }
     }
+
+    /* HAMBURGER BUTTON */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1100;
+    }
+    .hamburger span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      background: #fff;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .mobile-logo {
+      display: none;
+    }
+
+    /* MOBILE MENU */
+    @media (max-width: 900px) {
+      .hamburger {
+        display: flex;
+      }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100vw;
+        height: 100vh;
+        width: 70vw;
+        max-width: 320px;
+        background: #0D0D0D;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 5rem 2rem 2rem 2rem;
+        gap: 2rem;
+        box-shadow: -8px 0 32px rgba(0,0,0,0.25);
+        transition: right 0.3s;
+        z-index: 1050;
+      }
+      .nav-links.open {
+        right: 0;
+      }
+      .mobile-logo {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .nav-links .mobile-logo img {
+        height: 40px;
+        margin-bottom: 2rem;
+      }
+      .nav-links li:first-child {
+        padding-bottom: 0;
+        pointer-events: none;
+      }
+      nav {
+        padding: 1rem 1.2rem;
+      }
+    }
+
+    /* Hamburger animation (X) */
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
   </style>
 </head>
 
 <body>
   <nav>
-    <div class="logo">João Guilherme PT</div>
-    <ul class="nav-links">
+    <div class="logo">
+      <img src="https://i.ibb.co/cVs0TB7/logo.png" alt="Logo Prof. João Guilherme" style="height:32px;vertical-align:middle;margin-right:8px;">
+      Prof. João Guilherme
+    </div>
+    <button class="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="menu">
+      <li>
+        <div class="mobile-logo">
+          <img src="https://i.ibb.co/cVs0TB7/logo.png" alt="Logo Prof. João Guilherme" style="height:80px;display:block;margin:0 auto 2rem auto;">
+        </div>
+      </li>
       <li><a href="#inicio">Início</a></li>
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#treinos">Treinos</a></li>
-      <li><a href="#planos">Planos</a></li> <!-- NOVO ITEM -->
+      <li><a href="#planos">Planos</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
   </nav>
@@ -583,7 +679,7 @@
         <img class="card-image" src="https://images.unsplash.com/photo-1550345332-09e3ac987658?auto=format&fit=crop&w=600&q=60" alt="Treino Básico">
         <div class="card-content">
           <h3>Básico</h3>
-          <p class="price">€79<span>/mês</span></p>
+          <p class="price">R$120<span>/mês</span></p>
           <p class="billing">Pagamento mensal · Cancelamento fácil</p>
 
           <ul class="features">
@@ -603,7 +699,7 @@
         <div class="card-badge">Mais Popular</div>
         <div class="card-content">
           <h3>Intermediário</h3>
-          <p class="price">€149<span>/mês</span></p>
+          <p class="price">R$250<span>/mês</span></p>
           <p class="billing">Pagamento mensal · Cancelamento fácil</p>
 
           <ul class="features">
@@ -623,7 +719,7 @@
         <img class="card-image" src="https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=600&q=60" alt="Treino Premium">
         <div class="card-content">
           <h3>Premium</h3>
-          <p class="price">€249<span>/mês</span></p>
+          <p class="price">R$720<span>/mês</span></p>
           <p class="billing">Pagamento mensal · Cancelamento fácil</p>
 
           <ul class="features">
@@ -709,6 +805,27 @@
       alert('Mensagem enviada com sucesso! Entrarei em contato em breve.');
       e.target.reset();
     });
+    // Hamburger menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.getElementById('menu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !expanded);
+    });
+
+    // Fecha o menu ao clicar em um link (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link =>
+      link.addEventListener('click', () => {
+        if(window.innerWidth <= 900){
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', false);
+        }
+      })
+    );
   </script>
 </body>
 </html>
